@@ -1,5 +1,9 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
+import java.util.List;
+import java.util.Collections;
+
 
 class Enigma {
     public static void main(String[] args) {
@@ -35,15 +39,22 @@ class Enigma {
 
         ArrayList<String> ciphered = new ArrayList<String>();
         
-        ArrayList<String> alphabetList = new ArrayList<String>(); 
-        alphabetList = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+        List<String> alphabetList = new ArrayList<String>(); 
+        alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M",
+                                     "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+        List<String> reversedAlphabet = new ArrayList<String>();
+
 
         String[] textList = userString.split("");
 
         for (String letter : textList) {
+            Collections.reverse(alphabetList);
             int letterIndex = alphabetList.indexOf(letter);
-        }
+            Collections.reverse(alphabetList);
+            ciphered.add(alphabetList.get(letterIndex));
 
+        }
+        System.out.println(String.join("",ciphered));
     }
 
 }
