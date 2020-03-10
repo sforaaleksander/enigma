@@ -38,6 +38,7 @@ class ColumnarTranspositionCipher {
             }
         }
 
+        System.out.println(" ");
         System.out.println("REGULAR TABLE");
         for (int i = 0; i < rowsNum; i++) {
             for (int j = 0; j < userKey.length(); j++) {
@@ -46,6 +47,7 @@ class ColumnarTranspositionCipher {
             System.out.println("");
         }
 
+        System.out.println(" ");
         System.out.println("TRANSPOSITIONED COLUMNS");
         for (int i = 0; i < userKey.length(); i++) {
             for (int j = 0; j < rowsNum; j++) {
@@ -58,6 +60,7 @@ class ColumnarTranspositionCipher {
 
         char[][] sortedColumns = sortColumns(transpositionedColumns, userKey, rowsNum, toEncrypt);
 
+        System.out.println(" ");
         System.out.println("SORTED COLUMNS");
         for (int i = 0; i < userKey.length(); i++) {
             for (int j = 0; j < rowsNum; j++) {
