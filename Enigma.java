@@ -9,15 +9,15 @@ class Enigma {
             System.out.println("Please provide valid arguments: [-D/-E] [CIPHER NAME]");
             e.printStackTrace();
         }
-        String userMode = args[0].toUpperCase();
+        String userMode = args[0];
         String userCipher = args[1].toUpperCase();
         if (args.length == 3) {
             String userKey = args[2].toUpperCase();
             cipherChoice(userCipher, userMode, userKey);
-
         } else {
             cipherChoice(userCipher, userMode, "0");
-        }
+
+        } 
     }
 
     public static void cipherChoice(String userCipher, String userMode, String userKey) {
@@ -25,6 +25,11 @@ class Enigma {
             case "ATBASH":
                 AtbashCipher.atbash();
                 break;
+            case "CESAR":
+                CesarCipher.cesar(userKey, userMode);
+                break;
+            case "BACONIAN":
+                BaconianCipher.baconian(userMode);
             case "RAILFENCE":
                 RailfenceCipher.railfence(userMode, userKey);
                 break;
@@ -34,6 +39,12 @@ class Enigma {
             case "COLUMNARTRANSPOSITION":
                 ColumnarTranspositionCipher.columnarTransposition(userMode, userKey);
                 break;
+            case "SIMPLE":
+                SimpleCipher.simple(userKey, userMode);
+                break;
+            // case "AUTOKEY":
+            //     autokey(userKey, userMode);
+            //     break;
         }
     }
 }
