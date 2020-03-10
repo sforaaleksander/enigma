@@ -37,14 +37,3 @@ class Enigma {
         }
     }
 }
-
-
-// case "RAILFENCE":
-// RailfenceCipher.railfence(userMode, userKey);
-// break;
-// case "POLYBIUS":
-// PolybiusCipher.polybius(userMode, userKey);
-// break;
-// case "COLUMNARTRANSPOSITION":
-// ColumnarTranspositionCipher.columnarTransposition(userMode, userKey);
-// break;
