@@ -45,6 +45,9 @@ class Enigma {
             // case "AUTOKEY":
             //     autokey(userKey, userMode);
             //     break;
+            case "BEAUFORT":
+                BeaufortCipher.beaufort(userKey, userMode);
+                break;
         }
     }
 }
