@@ -1,45 +1,99 @@
 import java.util.Scanner;
 
 class PolybiusCipher {
+    private static char[] theMessage;
+    private static String enciphered = "";
+    private static String deciphered = "";
+    private static int TABLESIZE = 6;
+    private static char[][] table = new char[TABLESIZE][TABLESIZE];
+    private static char[] ALPHA = { '0', 'A', 'B', 'C', 'D', 'E' };
+    private static char[] theKey;
+
     public static void polybius(String userMode, String userKey) {
+        initialize(userKey);
+        printTable();
+        if (userMode.equals("-E")) {
+            enciphered = encipher();
+            System.out.println(enciphered);
+        } else if (userMode.equals("-D")) {
+
+        }
+    }
+
+    private static String gatherInput() {
         Scanner scan = new Scanner(System.in);
         String userString = scan.next().toUpperCase();
-        char[] toEncrypt = userString.toCharArray();
-        String ciphered = "";
-        char[] userKeyList = userKey.toCharArray();
-        char[][] table = new char[6][6];
-        table[0][0] = '#';
-        char[] alfa = { '0', 'A', 'B', 'C', 'D', 'E' };
         scan.close();
-        for (int i = 1; i < 6; i++) {
-            table[0][i] = alfa[i];
-            table[i][0] = alfa[i];
+        return userString;
+    }
+
+    private static void initialize(String userKey) {
+        String userString = gatherInput();
+        theMessage = userString.toCharArray();
+        theKey = userKey.toCharArray();
+        table = createTable();
+
+    }
+
+    private static char[][] createTable() {
+        table[0][0] = '#';
+        for (int i = 1; i < TABLESIZE; i++) {
+            table[0][i] = ALPHA[i];
+            table[i][0] = ALPHA[i];
         }
         int index = 0;
-        for (int i = 1; i < 6; i++) {
-            for (int j = 1; j < 6; j++) {
-                table[i][j] = userKeyList[index];
+        for (int i = 1; i < TABLESIZE; i++) {
+            for (int j = 1; j < TABLESIZE; j++) {
+                table[i][j] = theKey[index];
                 index += 1;
             }
         }
+        return table;
+    }
 
-        for (char letter : toEncrypt) {
-            for (int i = 1; i < 6; i++) {
-                for (int j = 1; j < 6; j++) {
-                    if (table[i][j] == letter) {
-                        ciphered += table[i][0];
-                        ciphered += table[0][j];
-                    }
-                }
-            }
-        }
-
-        for (int i = 0; i < 6; i++) {
-            for (int j = 0; j < 6; j++) {
+    private static void printTable() {
+        for (int i = 0; i < TABLESIZE; i++) {
+            for (int j = 0; j < TABLESIZE; j++) {
                 System.out.print(table[i][j]);
             }
             System.out.println("");
         }
-        System.out.println(ciphered);
+    }
+
+    private static String encipher() {
+        for (char letter : theMessage) {
+            for (int i = 1; i < TABLESIZE; i++) {
+                for (int j = 1; j < TABLESIZE; j++) {
+                    if (table[i][j] == letter) {
+                        enciphered += table[i][0];
+                        enciphered += table[0][j];
+                    }
+                }
+            }
+        }
+        return enciphered;
+    }
+
+    private static String decipher() {
+        int column;
+        int row;
+        int count = 0;
+        // for (int m = 0; m < theMessage.length; m++)
+        //     for (int i = 0; i < TABLESIZE; i++) {
+        //         if (table[i][0] == theMessage[m] && count == 0) {
+        //             row = i;
+        //         } else if (table[0][i] == theMessage[m] && count == 1) {
+        //             column = i;
+        //             deciphered += table[row][column];
+        //         }
+        //     }
+
+        for (int m = 0; m < theMessage.length / 2; m++){
+            for (int i = 0; i < TABLESIZE; i++) {
+                if (table[i][0] == theMessage[m])
+        }
+    }
+
+        return deciphered;
     }
 }
