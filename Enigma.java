@@ -42,12 +42,17 @@ class Enigma {
             case "SIMPLE":
                 SimpleCipher.simple(userKey, userMode);
                 break;
+<<<<<<< HEAD
             case "AUTOKEY":
                 AutokeyCipher.autokey(userKey, userMode);
+=======
+            // case "AUTOKEY":
+            //     autokey(userKey, userMode);
+            //     break;
+            case "BEAUFORT":
+                BeaufortCipher.beaufort(userKey, userMode);
+>>>>>>> 27b564ec1688877480b9aa48f4ab96af6c6f46e1
                 break;
         }
     }
 }
-
-
-
