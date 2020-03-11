@@ -6,33 +6,30 @@ import java.util.Collections;
 
 public class SimpleCipher{
 
-    public static void simple(String userKey, String userMode) {
-        System.out.println("Simple Cipher\n");
-        System.out.print("Enter message: ");
-        Scanner scan = new Scanner(System.in);
-        String userString = scan.nextLine().toUpperCase();
-        List<String> alphabetList = new ArrayList<String>();
-        alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-                "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+    private static String userString = userMessage();
+    private static List<String> alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+            "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+    private static String[] textList = userString.split(""); 
+    private static List<String> ciphered = new ArrayList<String>();
+    private static List<String> newAlphabetList = new ArrayList<>();
+    private static List<String> alphabetChangeList = new ArrayList<String>();
 
-        String[] textList = userString.split("");
-        // String[] userKeyArr = userKey.split("");
+    public static void simple(String userKey, String userMode) {
+        
         List<String> userKeyList = new ArrayList<>();
         userKeyList = Arrays.asList(userKey.split(""));
 
         if (userMode.equals("-e")) {
-            simpleCipher(userKeyList, textList, alphabetList);
+            simpleCipher(userKeyList);
         }
         else if (userMode.equals("-d")) {
-        simpleDecipher(userKeyList, textList, alphabetList);
+        simpleDecipher(userKeyList);
         }
 
     }
 
-    public static void simpleCipher(List<String> userKeyList, String[] textList, List<String> alphabetList) {
-        List<String> ciphered = new ArrayList<String>();
-        List<String> newAlphabetList = new ArrayList<>();
-        List<String> alphabetChangeList = new ArrayList<String>();
+    public static void simpleCipher(List<String> userKeyList) {
+        
         alphabetChangeList.addAll(alphabetList);
         for (String letter : userKeyList) {
             for (int i = 0; i < alphabetChangeList.size(); i++) {
@@ -43,7 +40,6 @@ public class SimpleCipher{
         }
         newAlphabetList.addAll(userKeyList);
         newAlphabetList.addAll(alphabetChangeList);
-        System.out.println(newAlphabetList);
 
         for (String letter : textList) {
             int letterIndex = alphabetList.indexOf(letter);
@@ -56,10 +52,7 @@ public class SimpleCipher{
         System.out.println("Cipher message: " + String.join("", ciphered));
     }
 
-    public static void simpleDecipher(List<String> userKeyList, String[] textList, List<String> alphabetList) {
-        List<String> ciphered = new ArrayList<String>();
-        List<String> newAlphabetList = new ArrayList<>();
-        List<String> alphabetChangeList = new ArrayList<String>();
+    public static void simpleDecipher(List<String> userKeyList) {
         alphabetChangeList.addAll(alphabetList);
         for (String letter : userKeyList) {
             for (int i = 0; i < alphabetChangeList.size(); i++) {
@@ -80,5 +73,14 @@ public class SimpleCipher{
             }
         }
         System.out.println("Decipher message: " + String.join("", ciphered));
+    }
+
+    public static String userMessage() {
+        System.out.println("Baconian Cipher\n");
+        System.out.print("Enter message: ");
+        Scanner scan = new Scanner(System.in);
+        String userString = scan.nextLine().toUpperCase();
+        scan.close();
+        return userString;
     }
 }

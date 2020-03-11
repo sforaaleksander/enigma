@@ -43,9 +43,9 @@ class Enigma {
             case "SIMPLE":
                 SimpleCipher.simple(userKey, userMode);
                 break;
-            // case "AUTOKEY":
-            //     autokey(userKey, userMode);
-            //     break;
+            case "AUTOKEY":
+                AutokeyCipher.autokey(userKey, userMode);
+                break;
             case "BEAUFORT":
                 BeaufortCipher.beaufort(userKey, userMode);
                 break;
