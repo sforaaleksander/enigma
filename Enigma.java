@@ -30,6 +30,7 @@ class Enigma {
                 break;
             case "BACONIAN":
                 BaconianCipher.baconian(userMode);
+                break;
             case "RAILFENCE":
                 RailfenceCipher.railfence(userMode, userKey);
                 break;
