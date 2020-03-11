@@ -5,21 +5,19 @@ import java.util.List;
 import java.util.Collections;
 
 public class AutokeyCipher{
+    private static List<String> alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", 
+                                                             "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
 
     public static void autokey(String userKey, String userMode) {
         
         String userString = userMessage();
-        List<String> alphabetList = new ArrayList<String>();
-        alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-                "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-
         String userStringStrip = userString.replaceAll("\\s", ""); 
         List<String> textList = new ArrayList<>();
         textList = Arrays.asList(userStringStrip.split(""));
         List<String> userKeyList = new ArrayList<>();
         userKeyList = Arrays.asList(userKey.split(""));
 
-        userChoice(userMode, userKeyList, textList, alphabetList);
+        userChoice(userMode, userKeyList, textList);
         
     }
 
@@ -32,16 +30,16 @@ public class AutokeyCipher{
         return userString;
     }
 
-    public static void userChoice(String userMode, List<String> userKeyList, List<String> textList, List<String> alphabetList){
+    public static void userChoice(String userMode, List<String> userKeyList, List<String> textList){
         if (userMode.equals("-e")) {
-            autokeyCipher(userKeyList, textList, alphabetList);
+            autokeyCipher(userKeyList, textList);
         }
         else if (userMode.equals("-d")) {
-            autokeyDecipher(userKeyList, textList, alphabetList);
+            autokeyDecipher(userKeyList, textList);
         }
     }
 
-    public static void autokeyCipher(List<String> userKeyList, List<String> textList, List<String> alphabetList){
+    public static void autokeyCipher(List<String> userKeyList, List<String> textList){
         
         List<String> mainKey = mainKeyMethod(userKeyList, textList);
         String[][] tabulaRecta = tabulaRectaMethod(alphabetList);    
@@ -83,7 +81,7 @@ public class AutokeyCipher{
         return tabulaRecta;
     }
 
-    public static void autokeyDecipher(List<String> userKeyList, List<String> textList, List<String> alphabetList){
+    public static void autokeyDecipher(List<String> userKeyList, List<String> textList){
         List<String> mainKey = new ArrayList<>();
         mainKey.addAll(userKeyList);
         String[][] tabulaRecta = tabulaRectaMethod(alphabetList);    
