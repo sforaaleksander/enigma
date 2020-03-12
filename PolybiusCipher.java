@@ -16,6 +16,8 @@ class PolybiusCipher {
             enciphered = encipher();
             System.out.println(enciphered);
         } else if (userMode.equals("-D")) {
+            deciphered = decipher();
+            System.out.println(deciphered);
 
         }
     }
@@ -75,25 +77,26 @@ class PolybiusCipher {
     }
 
     private static String decipher() {
-        int column;
-        int row;
-        int count = 0;
-        // for (int m = 0; m < theMessage.length; m++)
-        //     for (int i = 0; i < TABLESIZE; i++) {
-        //         if (table[i][0] == theMessage[m] && count == 0) {
-        //             row = i;
-        //         } else if (table[0][i] == theMessage[m] && count == 1) {
-        //             column = i;
-        //             deciphered += table[row][column];
-        //         }
-        //     }
-
-        for (int m = 0; m < theMessage.length / 2; m++){
-            for (int i = 0; i < TABLESIZE; i++) {
-                if (table[i][0] == theMessage[m])
+        int m = 0;
+        while (m < theMessage.length) {
+            for (int row = 1; row < TABLESIZE; row++) {
+                if (table[row][0] == theMessage[m]) {
+                    m += 1;
+                    for (int column = 1; column < TABLESIZE; column++) {
+                        if (table[0][column] == theMessage[m]) {
+                            m += 1;
+                            deciphered += table[row][column];
+                            if (deciphered.length() == theMessage.length/2){
+                                return deciphered;
+                            }
+                            break;
+                        }
+                    }
+                }
+            }
         }
+        return "";
+        
     }
 
-        return deciphered;
-    }
 }

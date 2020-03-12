@@ -16,7 +16,6 @@ class Enigma {
             cipherChoice(userCipher, userMode, userKey);
         } else {
             cipherChoice(userCipher, userMode, "0");
-
         } 
     }
 
