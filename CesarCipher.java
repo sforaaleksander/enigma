@@ -10,19 +10,38 @@ public class CesarCipher {
     private static List<String> alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
             "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
     private static List<String> ciphered = new ArrayList<String>();
-    private static String[] textList = userString.split("");
+    private static String userStringStrip = userString.replaceAll("\\s", "");
+    private static List<String> textList;
+    private static int userKeyInt;
+    
 
     public static void cesar(String userKey, String userMode) {
+        userKeyInt = Integer.parseInt(userKey);
+        List<String> textListToCheck = Arrays.asList(userStringStrip.split(""));
+        textList = new ArrayList<>();
+        for(String letter : textListToCheck){
+            if(alphabetList.contains(letter)){
+                textList.add(letter);
+            }   
+        }
+        if(textList.size() == textListToCheck.size()){
+            userChoice(userMode);
+        }
+        else{
+            System.out.println("Message can contains anly letters from english alphabet.");
+        }  
+    }
 
+    public static void userChoice(String userMode) {
         if (userMode.equals("-e")) {
-            cesarCipher(userKey);
+            cesarCipher();
         } else if (userMode.equals("-d")) {
-            cesarDecipher(userKey);
+            cesarDecipher();
         }
     }
 
     public static String userMessage() {
-        System.out.println("Baconian Cipher\n");
+        System.out.println("Cesar Cipher\n");
         System.out.print("Enter message: ");
         Scanner scan = new Scanner(System.in);
         String userString = scan.nextLine().toUpperCase();
@@ -30,29 +49,21 @@ public class CesarCipher {
         return userString;
     }
 
-    private static void cesarCipher(String userKey) {
-        int userKeyInt = Integer.parseInt(userKey);
+    private static void cesarCipher() {
+        
         for (String letter : textList) {
             int letterIndex = alphabetList.indexOf(letter);
-            if (letter.equals(" ")) {
-                ciphered.add(" ");
-            } else {
-                ciphered.add(alphabetList.get((letterIndex + userKeyInt) % 26));
-            }
+            ciphered.add(alphabetList.get((letterIndex + userKeyInt) % 26));
         }
         System.out.println("Cipher message: " + String.join("", ciphered));
     }
 
-    private static void cesarDecipher(String userKey) {
-        int userKeyInt = Integer.parseInt(userKey);
+    private static void cesarDecipher() {
         Collections.reverse(alphabetList);
         for (String letter : textList) {
             int letterIndex = alphabetList.indexOf(letter);
-            if (letter.equals(" ")) {
-                ciphered.add("");
-            } else {
-                ciphered.add(alphabetList.get((letterIndex + userKeyInt) % 26));
-            }
+            ciphered.add(alphabetList.get((letterIndex + userKeyInt) % 26));
+            
         }
         System.out.println("Decipher message: " + String.join("", ciphered));
     }

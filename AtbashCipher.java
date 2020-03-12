@@ -5,22 +5,31 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 class AtbashCipher {
+
+    private static List<String> alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+            "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
+    private static String userString = userMessage();
+    private static String userStringStrip = userString.replaceAll("\\s", ""); 
+    private static List<String> ciphered = new ArrayList<String>();
+    private static List<String> textList = Arrays.asList(userStringStrip.split(""));
+
+
     public static void atbash() {
-        Scanner scan = new Scanner(System.in);
-        String userString = scan.next().toUpperCase();
-        System.out.println("ciphering: " + userString);
-        List<String> ciphered = new ArrayList<String>();
-        List<String> alphabetList = new ArrayList<String>();
-        alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P",
-                "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
-        String[] textList = userString.split("");
         for (String letter : textList) {
             int letterIndex = alphabetList.indexOf(letter);
             Collections.reverse(alphabetList);
             ciphered.add(alphabetList.get(letterIndex));
             Collections.reverse(alphabetList);
         }
-        System.out.println(String.join("", ciphered));
+        System.out.println("\nCiphered message: " + String.join("", ciphered));
+    }
+
+    public static String userMessage() {
+        System.out.println("Atbash Cipher\n");
+        System.out.print("Enter message: ");
+        Scanner scan = new Scanner(System.in);
+        String userString = scan.nextLine().toUpperCase();
         scan.close();
+        return userString;
     }
 }
