@@ -9,17 +9,19 @@ class PolybiusCipher {
     private static char[] ALPHA = { '0', 'A', 'B', 'C', 'D', 'E' };
     private static char[] theKey;
 
-    public static void polybius(String userMode, String userKey) {
+    public static String polybius(String userMode, String userKey) {
         initialize(userKey);
         printTable();
         if (userMode.equals("-E")) {
             enciphered = encipher();
             System.out.println(enciphered);
+            return enciphered;
         } else if (userMode.equals("-D")) {
             deciphered = decipher();
             System.out.println(deciphered);
-
+            return deciphered;
         }
+        return "";
     }
 
     private static String gatherInput() {

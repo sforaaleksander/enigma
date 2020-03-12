@@ -14,14 +14,16 @@ class AtbashCipher {
     private static List<String> textList = Arrays.asList(userStringStrip.split(""));
 
 
-    public static void atbash() {
+    public static String atbash() {
         for (String letter : textList) {
             int letterIndex = alphabetList.indexOf(letter);
             Collections.reverse(alphabetList);
             ciphered.add(alphabetList.get(letterIndex));
             Collections.reverse(alphabetList);
         }
-        System.out.println("\nCiphered message: " + String.join("", ciphered));
+        // System.out.println("\nCiphered message: " + String.join("", ciphered));
+        return "\nCiphered message: " + String.join("", ciphered);
+
     }
 
     public static String userMessage() {
