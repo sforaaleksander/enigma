@@ -6,11 +6,11 @@ import java.util.List;
 public class SimpleCipher {
 
     private static String userString = userMessage();
-    private static List<String> alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+    private static List<String> ALPHABETLIST = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
             "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
     private static List<String> textList;
     private static List<String> ciphered = new ArrayList<String>();
-    private static List<String> newAlphabetList = new ArrayList<>();
+    private static List<String> newALPHABETLIST = new ArrayList<>();
     private static List<String> alphabetChangeList = new ArrayList<String>();
     private static String userStringStrip = userString.replaceAll("\\s", "");
     private static List<String> userKeyList = new ArrayList<>();
@@ -23,7 +23,7 @@ public class SimpleCipher {
         userKeyList = Arrays.asList(userKey.split(""));
         textList = new ArrayList<>();
         for(String letter : textListToCheck){
-            if(alphabetList.contains(letter)){
+            if(ALPHABETLIST.contains(letter)){
                 textList.add(letter);
             }   
         }
@@ -35,7 +35,7 @@ public class SimpleCipher {
         } 
     }
 
-    public static void userChoice(String userMode) {
+    private static void userChoice(String userMode) {
         if (userMode.equals("-e")) {
             simpleCipher();
         } else if (userMode.equals("-d")) {
@@ -43,35 +43,35 @@ public class SimpleCipher {
         }
     }
 
-    public static void simpleCipher() {
+    private static void simpleCipher() {
 
-        newAlphabetList = newAlphabetListMethod();
+        newALPHABETLIST = newALPHABETLISTMethod();
         for (String letter : textList) {
-            int letterIndex = alphabetList.indexOf(letter);
+            int letterIndex = ALPHABETLIST.indexOf(letter);
             if (letter.equals(" ")) {
                 ciphered.add("");
             } else {
-                ciphered.add(newAlphabetList.get(letterIndex));
+                ciphered.add(newALPHABETLIST.get(letterIndex));
             }
         }
         System.out.println("\nCiphered message: " + String.join("", ciphered));
     }
 
-    public static void simpleDecipher() {
+    private static void simpleDecipher() {
 
-        newAlphabetList = newAlphabetListMethod();
+        newALPHABETLIST = newALPHABETLISTMethod();
         for (String letter : textList) {
-            int letterIndex = newAlphabetList.indexOf(letter);
+            int letterIndex = newALPHABETLIST.indexOf(letter);
             if (letter.equals(" ")) {
                 ciphered.add("");
             } else {
-                ciphered.add(alphabetList.get(letterIndex));
+                ciphered.add(ALPHABETLIST.get(letterIndex));
             }
         }
         System.out.println("\nDeciphered message: " + String.join("", ciphered));
     }
 
-    public static String userMessage() {
+    private static String userMessage() {
         System.out.println("Simple Cipher\n");
         System.out.print("Enter message: ");
         Scanner scan = new Scanner(System.in);
@@ -80,8 +80,8 @@ public class SimpleCipher {
         return userString;
     }
 
-    public static List<String> newAlphabetListMethod() {
-        alphabetChangeList.addAll(alphabetList);
+    private static List<String> newALPHABETLISTMethod() {
+        alphabetChangeList.addAll(ALPHABETLIST);
         for (String letter : userKeyList) {
             for (int i = 0; i < alphabetChangeList.size(); i++) {
                 if (letter.equalsIgnoreCase(alphabetChangeList.get(i))) {
@@ -89,9 +89,9 @@ public class SimpleCipher {
                 }
             }
         }
-        newAlphabetList.addAll(userKeyList);
-        newAlphabetList.addAll(alphabetChangeList);
-        return newAlphabetList;
+        newALPHABETLIST.addAll(userKeyList);
+        newALPHABETLIST.addAll(alphabetChangeList);
+        return newALPHABETLIST;
 
     }
 }

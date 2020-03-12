@@ -72,9 +72,9 @@ class ColumnarTranspositionCipher {
 
     }
 
-    private static void printModifiedTable(char[][] tableToPrint) {
+    private static void printModifiedTable(char[][] tableToPrint, String title) {
         System.out.println(" ");
-        System.out.println("TRANSPOSITIONED COLUMNS");
+        System.out.println(title);
         for (int i = 0; i < theKey.length; i++) {
             for (int j = 0; j < rowsNum; j++) {
                 System.out.print(tableToPrint[i][j]);
@@ -121,7 +121,9 @@ class ColumnarTranspositionCipher {
         transpositionedColumns = transpositionColumns(table);
         sortedColumns = sortColumns(transpositionedColumns);
         printRegularTable(table);
-        printModifiedTable(table);
+        printModifiedTable(transpositionedColumns, "TRANSPOSITIONED COLUMNS");
+        printModifiedTable(sortedColumns, "SORTED COLUMNS");
+
         enciphered = collectLetters();
         System.out.println(enciphered);
     }
@@ -134,8 +136,8 @@ class ColumnarTranspositionCipher {
         transpositionedColumns = transpositionColumns(decipherTable);
         sortedColumns = sortColumnsDecipher(transpositionedColumns);
         printRegularTable(decipherTable);
-        printModifiedTable(transpositionedColumns);
-        printModifiedTable(sortedColumns);
+        printModifiedTable(transpositionedColumns, "TRANSPOSITIONED COLUMNS");
+        printModifiedTable(sortedColumns, "SORTED COLUMNS");
         deciphered = readDecipher();
         System.out.println(deciphered);
 

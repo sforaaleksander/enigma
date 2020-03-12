@@ -5,7 +5,7 @@ import java.util.List;
 import java.util.Collections;
 
 public class AutokeyCipher {
-    private static List<String> alphabetList = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
+    private static List<String> ALPHABETLIST = Arrays.asList("A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L",
             "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z");
     private static String userString = userMessage();
     private static String userStringStrip = userString.replaceAll("\\s", "");
@@ -20,7 +20,7 @@ public class AutokeyCipher {
         userKeyList = Arrays.asList(userKey.split(""));
         textList = new ArrayList<>();
         for(String letter : textListToCheck){
-            if(alphabetList.contains(letter)){
+            if(ALPHABETLIST.contains(letter)){
                 textList.add(letter);
             }   
         }
@@ -33,7 +33,7 @@ public class AutokeyCipher {
     }
 
 
-    public static String userMessage() {
+    private static String userMessage() {
         System.out.println("Autokey Cipher\n");
         System.out.print("Enter message: ");
         Scanner scan = new Scanner(System.in);
@@ -42,7 +42,7 @@ public class AutokeyCipher {
         return userString;
     }
 
-    public static void userChoice(String userMode) {
+    private static void userChoice(String userMode) {
         if (userMode.equals("-e")) {
             autokeyCipher();
         } else if (userMode.equals("-d")) {
@@ -50,14 +50,14 @@ public class AutokeyCipher {
         }
     }
 
-    public static void autokeyCipher() {
+    private static void autokeyCipher() {
         try {
             List<String> mainKey = mainKeyMethod();
             int indexLettekKey = 0;
             int indexLetterText = 0;
             while (indexLettekKey < mainKey.size()) {
-                int i = alphabetList.indexOf(mainKey.get(indexLettekKey));
-                int j = alphabetList.indexOf(textList.get(indexLetterText));
+                int i = ALPHABETLIST.indexOf(mainKey.get(indexLettekKey));
+                int j = ALPHABETLIST.indexOf(textList.get(indexLetterText));
                 cipher.add(tabulaRecta[i][j]);
                 indexLettekKey++;
                 indexLetterText++;
@@ -69,7 +69,7 @@ public class AutokeyCipher {
         }
     }
 
-    public static List<String> mainKeyMethod() {
+    private static List<String> mainKeyMethod() {
         List<String> mainKey = new ArrayList<>();
         mainKey.addAll(userKeyList);
         for (String letter : textList) {
@@ -82,24 +82,24 @@ public class AutokeyCipher {
         return mainKey;
     }
 
-    public static String[][] tabulaRectaMethod() {
+    private static String[][] tabulaRectaMethod() {
         String[][] tabulaRecta = new String[26][26];
-        for (int j = 0; j < alphabetList.size(); j++) {
-            for (int i = 0; i < alphabetList.size(); i++) {
-                tabulaRecta[j][i] = alphabetList.get(i);
+        for (int j = 0; j < ALPHABETLIST.size(); j++) {
+            for (int i = 0; i < ALPHABETLIST.size(); i++) {
+                tabulaRecta[j][i] = ALPHABETLIST.get(i);
             }
-            Collections.rotate(alphabetList, alphabetList.size() - 1);
+            Collections.rotate(ALPHABETLIST, ALPHABETLIST.size() - 1);
         }
         return tabulaRecta;
     }
 
-    public static void autokeyDecipher() {
+    private static void autokeyDecipher() {
         List<String> mainKey = new ArrayList<>();
         mainKey.addAll(userKeyList);
         int indexLetterKey = 0;
         int indexLetterText = 0;
         while (indexLetterText < textList.size()) {
-            int i = alphabetList.indexOf(mainKey.get(indexLetterKey));
+            int i = ALPHABETLIST.indexOf(mainKey.get(indexLetterKey));
             for (String[] row : tabulaRecta) {
                 if (row[i].equalsIgnoreCase(textList.get(indexLetterText))) {
                     cipher.add(row[0]);

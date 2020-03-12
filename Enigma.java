@@ -11,7 +11,7 @@ class Enigma {
             System.out.println("Please provide valid arguments: [-D/-E] [CIPHER NAME]");
             e.printStackTrace();
         }
-        String userMode = args[0];
+        String userMode = args[0].toUpperCase();
         String userCipher = args[1].toUpperCase();
         if (args.length == 3) {
             String userKey = args[2].toUpperCase();
@@ -22,46 +22,19 @@ class Enigma {
     }
 
     public static void cipherChoice(String userCipher, String userMode, String userKey) {
-        Map<String, String> runCipher = Map.of(
-            "ATBASH", AtbashCipher.atbash(),
-            "POLYBIUS", PolybiusCipher.polybius(userMode, userKey));
-        System.out.println(runCipher.get(userCipher));     
+
+        Map<String, Runnable> commands = new HashMap<>();
+        commands.put("ATBASH", () -> AtbashCipher.atbash());
+        commands.put("CESAR", () -> CaesarCipher.caesar(userKey, userMode));
+        commands.put("BACONIAN", () -> BaconianCipher.baconian(userMode));
+        commands.put("RAILFENCE", () -> RailfenceCipher.railfence(userMode, userKey));
+        commands.put("POLYBIUS", () -> PolybiusCipher.polybius(userMode, userKey));
+        commands.put("COLUMNARTRANSPOSITION", () -> ColumnarTranspositionCipher.columnarTransposition(userMode, userKey));
+        commands.put("SIMPLE", () -> SimpleCipher.simple(userKey, userMode));
+        commands.put("AUTOKEY", () -> AutokeyCipher.autokey(userKey, userMode));
+        commands.put("BEAUFORT", () -> BeaufortCipher.beaufort(userKey, userMode));
+
+        commands.get(userCipher).run();
+
     }
 }
-
-
-
-//              "ATBASH", AtbashCipher.atbash(),
-//             "BACONIAN", BaconianCipher.baconian(userMode),
-//             "RAILFENCE", RailfenceCipher.railfence(userMode, userKey),
-//             "POLYBIUS", PolybiusCipher.polybius(userMode, userKey),
-//             "COLUMNARTRANSPOSITION", ColumnarTranspositionCipher.columnarTransposition(userMode, userKey));
-// // switch (userCipher) {
-// case "ATBASH":
-// AtbashCipher.atbash();
-// break;
-// case "CAESAR":
-// CesarCipher.cesar(userKey, userMode);
-// break;
-// case "BACONIAN":
-// BaconianCipher.baconian(userMode);
-// break;
-// case "RAILFENCE":
-// RailfenceCipher.railfence(userMode, userKey);
-// break;
-// case "POLYBIUS":
-// PolybiusCipher.polybius(userMode, userKey);
-// break;
-// case "COLUMNARTRANSPOSITION":
-// ColumnarTranspositionCipher.columnarTransposition(userMode, userKey);
-// break;
-// case "SIMPLE":
-// SimpleCipher.simple(userKey, userMode);
-// break;
-// case "AUTOKEY":
-// AutokeyCipher.autokey(userKey, userMode);
-// break;
-// case "BEAUFORT":
-// BeaufortCipher.beaufort(userKey, userMode);
-// break;
-// }
