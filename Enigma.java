@@ -9,14 +9,13 @@ class Enigma {
             System.out.println("Please provide valid arguments: [-D/-E] [CIPHER NAME]");
             e.printStackTrace();
         }
-        String userMode = args[0];
+        String userMode = args[0].toUpperCase();
         String userCipher = args[1].toUpperCase();
         if (args.length == 3) {
             String userKey = args[2].toUpperCase();
             cipherChoice(userCipher, userMode, userKey);
         } else {
             cipherChoice(userCipher, userMode, "0");
-
         } 
     }
 
