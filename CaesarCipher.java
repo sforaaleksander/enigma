@@ -37,8 +37,8 @@ public class CaesarCipher {
         userKeyInt = Integer.parseInt(userKey);
         }
         catch(NumberFormatException e){
-            System.out.println("\nYou didn't pass an integer no. for key, so your key will be: 1.\n");
-            userKeyInt = 1;
+            System.out.println("\nYou didn't pass an integer no. for key, so your key will be: 0.\n");
+            userKeyInt = 0;
         }
         return userKeyInt;
     }
@@ -66,6 +66,7 @@ public class CaesarCipher {
             int letterIndex = ALPHABETLIST.indexOf(letter);
             ciphered.add(ALPHABETLIST.get((letterIndex + userKeyInt) % 26));
         }
+        System.out.println("\nYour key : " + userKeyInt);
         System.out.println("Cipher message: " + String.join("", ciphered));
     }
 
@@ -76,6 +77,7 @@ public class CaesarCipher {
             ciphered.add(ALPHABETLIST.get((letterIndex + userKeyInt) % 26));
             
         }
+        System.out.println("\nYour key : " + userKeyInt);
         System.out.println("Decipher message: " + String.join("", ciphered));
     }
 }
