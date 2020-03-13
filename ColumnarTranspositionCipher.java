@@ -125,7 +125,8 @@ class ColumnarTranspositionCipher {
         printModifiedTable(sortedColumns, "SORTED COLUMNS");
 
         enciphered = collectLetters();
-        System.out.println(enciphered);
+        System.out.println(" ");
+        System.out.println("ENCIPHERED: " + enciphered);
     }
 
     private static void decipher() {
@@ -139,7 +140,8 @@ class ColumnarTranspositionCipher {
         printModifiedTable(transpositionedColumns, "TRANSPOSITIONED COLUMNS");
         printModifiedTable(sortedColumns, "SORTED COLUMNS");
         deciphered = readDecipher();
-        System.out.println(deciphered);
+        System.out.println(" ");
+        System.out.println("DECIPHERED: " + deciphered);
 
     }
 
