@@ -2,6 +2,7 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.List;
+import java.lang.NullPointerException;
 
 class Enigma {
     private static String[] args;
@@ -45,7 +46,7 @@ class Enigma {
     }
 
     private static void basicInfo() {
-        System.out.println("To execute program type: [-D/-E] [CIPHER NAME] optional[KEY].");
+        System.out.println("To execute program type: Enigma [-D/-E] [CIPHER NAME] optional[KEY].");
         System.out.println("To list all available ciphers type: Enigma -l");
         System.exit(0);
     }
@@ -70,6 +71,12 @@ class Enigma {
         cipherChoiceWithKey(userCipher, userMode, userKey);
     }
 
+    private static void tooManyArgs(String args[]) {
+        System.out.println("Too many arguments passed.");
+        basicInfo();
+    }
+
+
     //TODO: why do i need to pass an argument here if args is
     // defined as a static field of the class
     private static void checkArgs(String args[]) {
@@ -79,7 +86,11 @@ class Enigma {
         argsCount.put(1, () -> oneArgs(args));
         argsCount.put(2, () -> twoArgs(args));
         argsCount.put(3, () -> threeArgs(args));
-        argsCount.get(lengthOfArgs).run();
+        try {
+        argsCount.get(lengthOfArgs).run();}
+        catch (NullPointerException e){
+            tooManyArgs(args);
+        }
 
     }
 }
