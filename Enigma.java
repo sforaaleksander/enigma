@@ -19,7 +19,7 @@ class Enigma {
         //TODO is there a neater way of populating a hashmap?
         //map.of() did not work until i modified the cipher classes
         //to return a string instead of void
-        commands.put("CESAR", () -> CaesarCipher.caesar(userKey, userMode));
+        commands.put("CAESAR", () -> CaesarCipher.caesar(userKey, userMode));
         commands.put("RAILFENCE", () -> RailfenceCipher.railfence(userMode, userKey));
         commands.put("POLYBIUS", () -> PolybiusCipher.polybius(userMode, userKey));
         commands.put("COLUMNARTRANSPOSITION",
@@ -89,7 +89,8 @@ class Enigma {
         argsCount.put(2, () -> twoArgs(args));
         argsCount.put(3, () -> threeArgs(args));
         try {
-        argsCount.get(lengthOfArgs).run();}
+        argsCount.get(lengthOfArgs).run();
+    }
         catch (NullPointerException e){
             tooManyArgs(args);
         }
