@@ -89,7 +89,8 @@ class Enigma {
         argsCount.put(2, () -> twoArgs(args));
         argsCount.put(3, () -> threeArgs(args));
         try {
-        argsCount.get(lengthOfArgs).run();}
+        argsCount.get(lengthOfArgs).run();
+    }
         catch (NullPointerException e){
             tooManyArgs(args);
         }
