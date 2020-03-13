@@ -16,6 +16,9 @@ public class CaesarCipher {
     
 
     public static void caesar(String userKey, String userMode) {
+        if (userKey.equals("0")){
+            userKey = "3";
+        }
         userKeyInt = checkUserKey(userKey);
         List<String> textListToCheck = Arrays.asList(userStringStrip.split(""));
         textList = new ArrayList<>();
