@@ -15,13 +15,13 @@ class BeaufortCipher {
         initialize(userKey);
         printTabulaRecta();
         if (userMode.equals("-E")) {
-            System.out.println("BEAUFORT: ENCIPHER");
+            System.out.println(" ");
             enciphered = encipher();
-            System.out.println(enciphered);
+            System.out.println("ENCIPHERED: " + enciphered);
         } else if (userMode.equals("-D")) {
-            System.out.println("BEAUFORT: DECIPHER");
+            System.out.println(" ");
             deciphered = decipher();
-            System.out.println(deciphered);
+            System.out.println("DECIPHERED: " + deciphered);
         }
     }
 
