@@ -19,9 +19,9 @@ public class BaconianCipher {
 
     public static void baconian(String userMode) {
 
-        if (userMode.equals("-e")) {
+        if (userMode.equals("-E")) {
             checkUserText();
-        } else if (userMode.equals("-d")) {
+        } else if (userMode.equals("-D")) {
             checkUserCipherMessage();
         }
     }

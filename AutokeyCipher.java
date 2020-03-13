@@ -43,9 +43,9 @@ public class AutokeyCipher {
     }
 
     private static void userChoice(String userMode) {
-        if (userMode.equals("-e")) {
+        if (userMode.equals("-E")) {
             autokeyCipher();
-        } else if (userMode.equals("-d")) {
+        } else if (userMode.equals("-D")) {
             autokeyDecipher();
         }
     }

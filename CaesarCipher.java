@@ -33,9 +33,9 @@ public class CaesarCipher {
     }
 
     private static void userChoice(String userMode) {
-        if (userMode.equals("-e")) {
+        if (userMode.equals("-E")) {
             caesarCipher();
-        } else if (userMode.equals("-d")) {
+        } else if (userMode.equals("-D")) {
             caesarDecipher();
         }
     }

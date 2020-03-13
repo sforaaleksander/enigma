@@ -36,9 +36,9 @@ public class SimpleCipher {
     }
 
     private static void userChoice(String userMode) {
-        if (userMode.equals("-e")) {
+        if (userMode.equals("-E")) {
             simpleCipher();
-        } else if (userMode.equals("-d")) {
+        } else if (userMode.equals("-D")) {
             simpleDecipher();
         }
     }
