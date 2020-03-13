@@ -30,8 +30,8 @@ class BeaufortCipher {
 
     private static void initialize(String userKey){
         keyBase = userKey.toCharArray();
-        String userMessage = gatherInput();
-        theMessage = userMessage.toCharArray();
+        String userString = gatherInput();
+        theMessage = userString.toCharArray();
         String keyString = createKeyString();
         theKey = keyString.toCharArray();
         table = createTable();
@@ -64,9 +64,10 @@ class BeaufortCipher {
     private static String gatherInput() {
         System.out.println("ENTER YOUR MESSAGE: ");
         Scanner scan = new Scanner(System.in);
-        String userMessage = scan.next().toUpperCase();
+        String userMessage = scan.nextLine().toUpperCase();
+        String Message = userMessage.replaceAll("\\s+", "");
         scan.close();
-        return userMessage;
+        return Message;
     }
 
     private static char[][] createTable() {

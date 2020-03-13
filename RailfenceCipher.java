@@ -96,7 +96,7 @@ class RailfenceCipher {
 
     private static String gatherInput(){
         Scanner scan = new Scanner(System.in);
-        String userString = scan.next().toUpperCase();
+        String userString = scan.nextLine().toUpperCase().replaceAll("\\s+", "");
         System.out.println("ciphering: " + userString);
         scan.close();
         return userString;

@@ -39,7 +39,7 @@ class ColumnarTranspositionCipher {
 
     private static void gatherInput() {
         Scanner scan = new Scanner(System.in);
-        String userString = scan.next().toUpperCase();
+        String userString = scan.nextLine().toUpperCase().replaceAll("\\s+", "");
         if (userString.length() % theKey.length != 0) {
             int missing = theKey.length - (userString.length() % theKey.length);
             for (int i = 0; i < missing; i++) {
