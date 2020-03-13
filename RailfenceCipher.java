@@ -2,33 +2,45 @@ import java.util.Scanner;
 
 
 class RailfenceCipher {
+    private static String theMessage;
+    private static String userKey;
+    private static String enciphered = "";
+    private static String deciphered = "";
+
+    private static int row;
+    private static int col;
+    private static char[][] table; 
+
 
     public static void railfence(String userMode, String userKey) {
         if (userKey.equals("0")){
             userKey = "3";
         }
-        Scanner scan = new Scanner(System.in);
-        String userString = scan.next().toUpperCase();
-        System.out.println("ciphering: " + userString);
-        scan.close();
+
+        theMessage = gatherInput();
+        row = Integer.parseInt(userKey);
+        col = theMessage.length();
+        table = new char[row][col];
+
+
         if (userMode.equals("-E")) {
-            railfenceEncrypt(userKey, userString);
+            enciphered = railfenceEncrypt(theMessage);
+            System.out.println(" ");
+            System.out.println("ENCIPHERED: " + enciphered);
         } else
-            railfenceDecrypt(userKey, userString);
+            deciphered = railfenceDecrypt(theMessage);
+            System.out.println(" ");
+            railfenceDecrypt("DECIPHERED: " + theMessage);
 
     }
 
-    public static void railfenceEncrypt(String userKey, String userString) {
+    private static String railfenceEncrypt(String theMessage) {
         boolean direction = false;
-        String ciphered = "";
         int j = 0;
-        int row = Integer.parseInt(userKey);
-        int col = userString.length();
-        char[][] table = new char[row][col];
         for (int i = 0; i < col; i++) {
             if (j == 0 || j == row - 1)
                 direction = !direction;
-            table[j][i] = userString.charAt(i);
+            table[j][i] = theMessage.charAt(i);
             if (direction)
                 j++;
             else
@@ -37,20 +49,16 @@ class RailfenceCipher {
         for (int i = 0; i < row; i++) {
             for (int k = 0; k < col; k++) {
                 if (table[i][k] != 0) {
-                    ciphered += table[i][k];
+                    enciphered += table[i][k];
                 }
             }
         }
-        System.out.println(ciphered);
+        return enciphered;
     }
 
-    public static void railfenceDecrypt(String userKey, String userString) {
+    private static String railfenceDecrypt(String theMessage) {
         boolean direction = false;
         int j = 0;
-        int row = Integer.parseInt(userKey);
-        int col = userString.length();
-        char[][] table = new char[row][col];
-        String deciphered = "";
         for (int i = 0; i < col; i++) {
             if (j == 0 || j == row - 1)
                 direction = !direction;
@@ -67,7 +75,7 @@ class RailfenceCipher {
         for (int i = 0; i < row; i++) {
             for (int k = 0; k < col; k++) {
                 if (table[i][k] == '#' && index < col) {
-                    table[i][k] = userString.charAt(index++);
+                    table[i][k] = theMessage.charAt(index++);
                 }
             }
         }
@@ -83,7 +91,15 @@ class RailfenceCipher {
             else
                 j--;
         }
-        System.out.println(deciphered);
+        return deciphered;
 
     }
+
+    private static String gatherInput(){
+        Scanner scan = new Scanner(System.in);
+        String userString = scan.next().toUpperCase();
+        System.out.println("ciphering: " + userString);
+        scan.close();
+        return userString;
+        }
 }
