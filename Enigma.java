@@ -6,36 +6,19 @@ import java.util.List;
 class Enigma {
     private static String[] args;
     private static List<String> CIPHERLIST = Arrays.asList("ATBASH", "CAESAR", "BACONIAN", "RAILFENCE", "POLYBIUS",
-                                                "COLUMNARTRANSPOSITION", "SIMPLE", "AUTOKEY", "BEAUFORT");
+            "COLUMNARTRANSPOSITION", "SIMPLE", "AUTOKEY", "BEAUFORT");
+
     public static void main(String[] args) {
-
-        String userListMode = args[0];
-
-        // try {
-        // if (args.length < 2) {
-        // throw new ArrayIndexOutOfBoundsException("Not enough arguments!");
-        // }
-        // } catch (ArrayIndexOutOfBoundsException e) {
-        // System.out.println("Please provide valid arguments: [-D/-E] [CIPHER NAME]");
-        // e.printStackTrace();
-        // }
-        // String userMode = args[0].toUpperCase();
-        // String userCipher = args[1].toUpperCase();
-        // if (args.length == 3) {
-        // String userKey = args[2].toUpperCase();
-        // cipherChoice(userCipher, userMode, userKey);
-        // } else {
-        // cipherChoice(userCipher, userMode, "0");
-        // }
+        checkArgs(args);
     }
 
-    public static void cipherChoice(String userCipher, String userMode, String userKey) {
-
+    public static void cipherChoiceWithKey(String userCipher, String userMode, String userKey) {
         Map<String, Runnable> commands = new HashMap<>();
-        
-        commands.put("ATBASH", () -> AtbashCipher.atbash());
+
+        //TODO is there a neater way of populating a hashmap?
+        //map.of() did not work until i modified the cipher classes
+        //to return a string instead of void
         commands.put("CESAR", () -> CaesarCipher.caesar(userKey, userMode));
-        commands.put("BACONIAN", () -> BaconianCipher.baconian(userMode));
         commands.put("RAILFENCE", () -> RailfenceCipher.railfence(userMode, userKey));
         commands.put("POLYBIUS", () -> PolybiusCipher.polybius(userMode, userKey));
         commands.put("COLUMNARTRANSPOSITION",
@@ -45,12 +28,19 @@ class Enigma {
         commands.put("BEAUFORT", () -> BeaufortCipher.beaufort(userKey, userMode));
 
         commands.get(userCipher).run();
-
     }
 
-    private static void oneArgs() {
-        if (args[0].toUpperCase() != "-L") {
-            basicInfo();
+    private static void cipherChoiceWithoutKey(String userCipher, String userMode) {
+        Map<String, Runnable> noKeyCommands = new HashMap<>();
+        noKeyCommands.put("ATBASH", () -> AtbashCipher.atbash());
+        noKeyCommands.put("BACONIAN", () -> BaconianCipher.baconian(userMode));
+        noKeyCommands.get(userCipher).run();
+    }
+
+    private static void printCipherList() {
+        System.out.println("Available ciphers:");
+        for (int i = 0; i < CIPHERLIST.size(); i++) {
+            System.out.println((i + 1) + ". " + CIPHERLIST.get(i));
         }
     }
 
@@ -60,19 +50,36 @@ class Enigma {
         System.exit(0);
     }
 
-    private static void printCipherList() {
-
+    private static void oneArgs(String args[]) {
+        if (args[0].toUpperCase() != "-L") {
+            basicInfo();
+        } else
+            printCipherList();
     }
 
+    private static void twoArgs(String args[]) {
+        String userMode = args[0].toUpperCase();
+        String userCipher = args[1].toUpperCase();
+        cipherChoiceWithoutKey(userCipher, userMode);
+    }
 
+    private static void threeArgs(String args[]) {
+        String userMode = args[0].toUpperCase();
+        String userCipher = args[1].toUpperCase();
+        String userKey = args[2].toUpperCase();
+        cipherChoiceWithKey(userCipher, userMode, userKey);
+    }
 
-    private static void checkArgs() {
-
-    Map<Integer, Runnable> argsCount = new HashMap<>();
+    //TODO: why do i need to pass an argument here if args is
+    // defined as a static field of the class
+    private static void checkArgs(String args[]) {
+        Integer lengthOfArgs = args.length;
+        Map<Integer, Runnable> argsCount = new HashMap<>();
         argsCount.put(0, () -> basicInfo());
-        argsCount.put(1, () -> oneArgs());
-        argsCount.put(2, () -> basicInfo());
+        argsCount.put(1, () -> oneArgs(args));
+        argsCount.put(2, () -> twoArgs(args));
+        argsCount.put(3, () -> threeArgs(args));
+        argsCount.get(lengthOfArgs).run();
 
-
-}
+    }
 }
