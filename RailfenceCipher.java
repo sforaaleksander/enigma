@@ -4,6 +4,9 @@ import java.util.Scanner;
 class RailfenceCipher {
 
     public static void railfence(String userMode, String userKey) {
+        if (userKey.equals("0")){
+            userKey = "3";
+        }
         Scanner scan = new Scanner(System.in);
         String userString = scan.next().toUpperCase();
         System.out.println("ciphering: " + userString);

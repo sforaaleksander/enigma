@@ -18,6 +18,9 @@ class ColumnarTranspositionCipher {
     private static int[] order;
 
     public static void columnarTransposition(String userMode, String userKey) {
+        if (userKey.equals("0")){
+            userKey = "GERMAN";
+        }
         initialize(userKey);
         if (userMode.equals("-E")) {
             createTable();

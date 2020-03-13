@@ -12,6 +12,9 @@ class BeaufortCipher {
     private static char[] keyBase;
 
     public static void beaufort(String userKey, String userMode) {
+        if (userKey.equals("0")){
+            userKey = "FORTIFICATION";
+        }
         initialize(userKey);
         printTabulaRecta();
         if (userMode.equals("-E")) {
