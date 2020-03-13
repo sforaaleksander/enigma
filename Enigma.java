@@ -11,7 +11,7 @@ class Enigma {
             System.out.println("Please provide valid arguments: [-D/-E] [CIPHER NAME]");
             e.printStackTrace();
         }
-        String userMode = args[0].toUpperCase();
+        String userMode = args[0];
         String userCipher = args[1].toUpperCase();
         if (args.length == 3) {
             String userKey = args[2].toUpperCase();
@@ -25,7 +25,7 @@ class Enigma {
 
         Map<String, Runnable> commands = new HashMap<>();
         commands.put("ATBASH", () -> AtbashCipher.atbash());
-        commands.put("CESAR", () -> CaesarCipher.caesar(userKey, userMode));
+        commands.put("CAESAR", () -> CaesarCipher.caesar(userKey, userMode));
         commands.put("BACONIAN", () -> BaconianCipher.baconian(userMode));
         commands.put("RAILFENCE", () -> RailfenceCipher.railfence(userMode, userKey));
         commands.put("POLYBIUS", () -> PolybiusCipher.polybius(userMode, userKey));
