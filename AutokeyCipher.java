@@ -15,23 +15,39 @@ public class AutokeyCipher {
     private static String[][] tabulaRecta = tabulaRectaMethod();
 
     public static void autokey(String userKey, String userMode) {
-           
+
         List<String> textListToCheck = Arrays.asList(userStringStrip.split(""));
-        userKeyList = Arrays.asList(userKey.split(""));
+        userKeyList = checkUserKey(userKey);
         textList = new ArrayList<>();
-        for(String letter : textListToCheck){
-            if(ALPHABETLIST.contains(letter)){
+        for (String letter : textListToCheck) {
+            if (ALPHABETLIST.contains(letter)) {
                 textList.add(letter);
-            }   
+            }
         }
-        if(textList.size() == textListToCheck.size()){
+        if (textList.size() == textListToCheck.size()) {
             userChoice(userMode);
-        }
-        else{
+        } else {
             System.out.println("Message can contains anly letters from english alphabet.");
-        }        
+        }
     }
 
+    private static List<String> checkUserKey(String userKey) {
+
+        String userKeyStrip = userKey.replaceAll("\\s", "");
+        List<String> keyListToCheck = Arrays.asList(userKeyStrip.split(""));
+        for (String letter : keyListToCheck) {
+            if (ALPHABETLIST.contains(letter)) {
+                userKeyList.add(letter);
+            }
+        }
+        if (userKeyList.size() > 0) {
+            return userKeyList;
+        } else {
+            userKeyList.add("A");
+            return userKeyList;
+        }
+
+    }
 
     private static String userMessage() {
         System.out.println("Autokey Cipher\n");
@@ -62,7 +78,8 @@ public class AutokeyCipher {
                 indexLettekKey++;
                 indexLetterText++;
             }
-            System.out.println("\nCiphered message: " + String.join("", cipher));
+            System.out.println("\nYour key : " + String.join("", userKeyList));
+            System.out.println("Ciphered message: " + String.join("", cipher));
         } catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Message can contalin only english letters.");
             e.printStackTrace();
@@ -111,7 +128,8 @@ public class AutokeyCipher {
             indexLetterKey++;
             indexLetterText++;
         }
-        System.out.println("\nDecipher message: " + String.join("", cipher));
+        System.out.println("\nYour key : " + String.join("", userKeyList));
+        System.out.println("Decipher message: " + String.join("", cipher));
     }
 
 }

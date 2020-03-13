@@ -71,11 +71,7 @@ public class BaconianCipher {
     private static void baconianCipher() {
         for (String letter : textList) {
             int letterIndex = ALPHABETLIST.indexOf(letter);
-            if (letter.equals(" ")) {
-                ciphered.add("");
-            } else {
-                ciphered.add(numbersList.get(letterIndex));
-            }
+            ciphered.add(numbersList.get(letterIndex));
         }
         System.out.println("Cipher message: " + String.join("", ciphered));
     }

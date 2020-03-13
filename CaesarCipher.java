@@ -16,7 +16,7 @@ public class CaesarCipher {
     
 
     public static void caesar(String userKey, String userMode) {
-        userKeyInt = Integer.parseInt(userKey);
+        userKeyInt = checkUserKey(userKey);
         List<String> textListToCheck = Arrays.asList(userStringStrip.split(""));
         textList = new ArrayList<>();
         for(String letter : textListToCheck){
@@ -32,6 +32,17 @@ public class CaesarCipher {
         }  
     }
 
+    private static int checkUserKey(String userKey){
+        try{
+        userKeyInt = Integer.parseInt(userKey);
+        }
+        catch(NumberFormatException e){
+            System.out.println("\nYou didn't pass an integer no. for key, so your key will be: 1.\n");
+            userKeyInt = 1;
+        }
+        return userKeyInt;
+    }
+
     private static void userChoice(String userMode) {
         if (userMode.equals("-E")) {
             caesarCipher();
@@ -40,7 +51,7 @@ public class CaesarCipher {
         }
     }
 
-    public static String userMessage() {
+    private static String userMessage() {
         System.out.println("Caesar Cipher\n");
         System.out.print("Enter message: ");
         Scanner scan = new Scanner(System.in);

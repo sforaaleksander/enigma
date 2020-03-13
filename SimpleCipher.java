@@ -18,9 +18,8 @@ public class SimpleCipher {
     public static void simple(String userKey, String userMode) {
 
         userKeyList = new ArrayList<>();
-
         List<String> textListToCheck = Arrays.asList(userStringStrip.split(""));
-        userKeyList = Arrays.asList(userKey.split(""));
+        userKeyList = checkUserKey(userKey);
         textList = new ArrayList<>();
         for(String letter : textListToCheck){
             if(ALPHABETLIST.contains(letter)){
@@ -33,6 +32,23 @@ public class SimpleCipher {
         else{
             System.out.println("Message can contains anly letters from english alphabet.");
         } 
+    }
+
+    private static List<String> checkUserKey(String userKey) {
+
+        String userKeyStrip = userKey.replaceAll("\\s", "");
+        List<String> keyListToCheck = Arrays.asList(userKeyStrip.split(""));
+        for (String letter : keyListToCheck) {
+            if (ALPHABETLIST.contains(letter)) {
+                userKeyList.add(letter);
+            }
+        }
+        if (userKeyList.size() > 0) {
+            return userKeyList;
+        } else {
+            userKeyList.add("A");
+            return userKeyList;
+        }
     }
 
     private static void userChoice(String userMode) {
@@ -54,7 +70,8 @@ public class SimpleCipher {
                 ciphered.add(newALPHABETLIST.get(letterIndex));
             }
         }
-        System.out.println("\nCiphered message: " + String.join("", ciphered));
+        System.out.println("\nYour key : " + String.join("", userKeyList));
+        System.out.println("Ciphered message: " + String.join("", ciphered));
     }
 
     private static void simpleDecipher() {
@@ -68,7 +85,8 @@ public class SimpleCipher {
                 ciphered.add(ALPHABETLIST.get(letterIndex));
             }
         }
-        System.out.println("\nDeciphered message: " + String.join("", ciphered));
+        System.out.println("\nYour key : " + String.join("", userKeyList));
+        System.out.println("Deciphered message: " + String.join("", ciphered));
     }
 
     private static String userMessage() {
