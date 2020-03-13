@@ -5,7 +5,7 @@ import java.util.List;
 import java.lang.NullPointerException;
 
 class Enigma {
-    private static String[] args;
+    // private static String[] args;
     private static List<String> CIPHERLIST = Arrays.asList("ATBASH", "CAESAR", "BACONIAN", "RAILFENCE", "POLYBIUS",
             "COLUMNARTRANSPOSITION", "SIMPLE", "AUTOKEY", "BEAUFORT");
 
@@ -52,10 +52,12 @@ class Enigma {
     }
 
     private static void oneArgs(String args[]) {
-        if (args[0].toUpperCase() != "-L") {
-            basicInfo();
-        } else
+        String listCiphers = args[0].toUpperCase();
+        if (listCiphers.equals("-L")) {
             printCipherList();
+        } else {
+            basicInfo();
+        }
     }
 
     private static void twoArgs(String args[]) {
