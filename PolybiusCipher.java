@@ -10,14 +10,18 @@ class PolybiusCipher {
     private static char[] theKey;
 
     public static void polybius(String userMode, String userKey) {
+        if (userKey.equals("0")){
+            userKey = "ZEBRACDFGHIKLMNOPQSTUVWXY";
+        }
         initialize(userKey);
         printTable();
         if (userMode.equals("-E")) {
             enciphered = encipher();
-            System.out.println(enciphered);
+            System.out.println(" ");
+            System.out.println("ENCIPHERED: " + enciphered);
         } else if (userMode.equals("-D")) {
             deciphered = decipher();
-            System.out.println(deciphered);
+            System.out.println("DECIPHERED: " + deciphered);
         }
     }
 
