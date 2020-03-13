@@ -59,9 +59,9 @@ public class AutokeyCipher {
     }
 
     private static void userChoice(String userMode) {
-        if (userMode.equals("-e")) {
+        if (userMode.equals("-e".toUpperCase())) {
             autokeyCipher();
-        } else if (userMode.equals("-d")) {
+        } else if (userMode.equals("-d".toUpperCase())) {
             autokeyDecipher();
         }
     }
