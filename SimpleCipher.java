@@ -16,6 +16,9 @@ public class SimpleCipher {
     private static List<String> userKeyList = new ArrayList<>();
 
     public static void simple(String userKey, String userMode) {
+        if (userKey.equals("0")){
+            userKey = "ZEBRA";
+        }
 
         userKeyList = new ArrayList<>();
         List<String> textListToCheck = Arrays.asList(userStringStrip.split(""));
@@ -43,12 +46,7 @@ public class SimpleCipher {
                 userKeyList.add(letter);
             }
         }
-        if (userKeyList.size() > 0) {
-            return userKeyList;
-        } else {
-            userKeyList.add("A");
-            return userKeyList;
-        }
+        return userKeyList;
     }
 
     private static void userChoice(String userMode) {
