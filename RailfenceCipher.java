@@ -3,7 +3,6 @@ import java.util.Scanner;
 
 class RailfenceCipher {
     private static String theMessage;
-    private static String userKey;
     private static String enciphered = "";
     private static String deciphered = "";
 
